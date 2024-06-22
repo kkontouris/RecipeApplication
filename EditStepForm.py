@@ -48,6 +48,8 @@ class EditStepForm:
         title=self.title_entry.get()
         description=self.description_entry.get()
         requiredTime=self.requiredTime_entry.get()
+        #παίρνει όλο το κείμενο από την αρχή μέχρι το τέλος, αφαιρει αρχικα και τελικά κενά
+        #και τα βάζει στη βάση δεδομένων
         ingredients=self.ingredients_entry.get("1.0", tk.END).strip()
 
         if not title or not description or not requiredTime or not ingredients:
@@ -58,9 +60,10 @@ class EditStepForm:
         messagebox.showinfo("Επιτυχία", "Η συνταγή ενημερώθηκε επιτυχώς")
         self.master.destroy()
 
-    #φορτώνει τις πληροφορίες από τη βάση δεδομένων στο entry
+    #φορτώνει τις πληροφορίες από τη βάση δεδομένων στο entry(fetchone)
     def load_step(self):
         try:
+            #tuple με τα στοιχεία από το βήμα που επέλεξε ο χρήστης
             step = self.repository.get_step_by_recipe_id2(self.step_id)
             if not step:
                 messagebox.showerror("Error", "Το βήμα δεν βρέθηκε")

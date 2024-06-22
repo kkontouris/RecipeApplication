@@ -135,6 +135,7 @@ class RecipePage:
     #συνάρτηση υπεύθυνη για το άνοιγμα της συνάρτησης open_edit_recipe_form(μόλις επιλέξει
     # ο χρήστης επεξεργασία συνταγής)
     def run_edit_recipe(self):
+        #διαλέγει ο χρήστης μια συνταγή και αποθηκεύεται το id της συνταγής
         selected_item = self.recipe_tree.selection()[0]
         recipe_id = self.recipe_tree.item(selected_item, "values")[0]
         self.open_edit_recipe_form(recipe_id)
@@ -143,7 +144,9 @@ class RecipePage:
     def search_recipes(self):
         searched_name=self.search_entry.get()
         recipes=self.repository.search_recipe_by_name(searched_name)
+        # Καθαρισμός του Treeview πριν από την εισαγωγή νέων αποτελεσμάτων
         self.recipe_tree.delete(*self.recipe_tree.get_children())
+        # Εισαγωγή των αποτελεσμάτων αναζήτησης από τη βάση δεδομένων στο Treeview
         for recipe in recipes:
             self.recipe_tree.insert("", "end", values=(recipe[0], recipe[1], recipe[2], recipe[3], recipe[4]))
 
@@ -151,7 +154,9 @@ class RecipePage:
     def load_recipes(self):
         for row in self.recipe_tree.get_children():
             self.recipe_tree.delete(row)
+        # παίρνω όλες τις συνταγών από τη βάση δεδομένων
         recipes=self.repository.get_all_recipes()
+        #εμφανιση των συνταγών στο tree view
         for recipe in recipes:
             self.recipe_tree.insert("", "end", values=(recipe["Id"], recipe["Name"], recipe["Category"], recipe["Effort"], recipe["Ingredients"]))
 
@@ -189,8 +194,8 @@ class RecipePage:
 
     #Συνάρτηση υπεύθυνη για να ανοίξει τη φόρμα για διαγραφή κάποιου βήματος συνταγής
     def open_delete_step_form(self, recipe_id):
-        delete_step_form=tk.Toplevel(self.master)
-        DeleteStepForm(delete_step_form, self.repository,recipe_id)
+        delete_step_form = tk.Toplevel(self.master)
+        DeleteStepForm(delete_step_form, self.repository, recipe_id)
 
 
 

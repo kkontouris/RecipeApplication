@@ -45,6 +45,7 @@ class EditRecipeForm:
         self.steps_frame = tk.LabelFrame(self.master, text="Βήματα Συνταγής")
         self.steps_frame.place(x=300, y=10, width=800, height=400)
 
+        #heading στο treeview
         self.steps_tree = ttk.Treeview(self.steps_frame, columns=("Id", "Title", "Description", "RequiredTime", "Ingredients"), show="headings")
         self.steps_tree.heading("Id", text="Id")
         self.steps_tree.heading("Title", text="Τίτλος")
@@ -63,6 +64,7 @@ class EditRecipeForm:
 
     #Φορτώνει τα στοιχεία της συνταγής από τη βάση δεδομένων και τα εισάγει στα αντίστοιχα πεδία εισαγωγής.
     def load_recipe(self):
+        #tuple με τα στοιχεία της συνταγής που επέλεξε ο χρήστης
         recipe=self.repository.get_recipe_by_id(self.recipe_id)
         self.name_entry.insert(0, recipe[1])
         self.category_entry.insert(0,recipe[2])
@@ -71,7 +73,9 @@ class EditRecipeForm:
 
     #συνάρτηση υπεύθυνη για εμφάνιση βημάτων στο treeview
     def load_steps(self):
+        #λιστα με τα βήματα της συνταγής που επέλεξε ο χρήστης(fetchall)
         steps=self.repository.get_steps_by_recipe_id(self.recipe_id)
+        #εισάγει στο treeview τα βήματα της συνταγής που επέλεξε ο χρήστης
         for step in steps:
             self.steps_tree.insert("", "end", values=step)
 

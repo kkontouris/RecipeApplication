@@ -43,7 +43,7 @@ class AddRecipeForm:
                                             command=self.save_recipe)
         self.button_save_recipe.grid(row=5, columnspan=2, pady=10)
 
-        # Λίστα βημάτων της συνταγής κενή
+        # Λίστα βημάτων της συνταγής κενή για να αποθηκεύονται τα βήματα σε αυτη τη κλάση
         self.steps_recipe = []
 
         # Δημιουργία αντικειμένου RecipeRepository

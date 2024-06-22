@@ -34,6 +34,7 @@ class DeleteStepForm:
 
     #συνάρτηση υπεύθυνη για να εμφανίσει τα βήματα προς διαγραφή στο treeview
     def load_steps(self):
+            #λιστα με τα βήματα
             for step in self.repository.get_steps_by_recipe_id(self.recipe_id):
                 self.steps_tree.insert("", "end", values=step)
 

@@ -57,7 +57,7 @@ class AddStepForm:
             messagebox.showerror("Error", "Invalid time format. Please enter a valid number.")
             return
 
-        # Δημιουργία ενός νέου βήματος
+        # Δημιουργία ενός νέου βήματος σε λεξικό
         step = {
             "Title": title,
             "Description": description,

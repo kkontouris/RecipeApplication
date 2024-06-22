@@ -22,6 +22,9 @@ class RecipeRepository:
             print(f"An error occurred: {e}")
         return recipes
 
+    #όταν ο χρήστης κάνει προσθήκη συνταγής και το αποθηκεύσει τότε θα αποθηκευτούν στη βάση δεδομένων
+    #το όνομα της συνταγής, η κατηγορία, ο βαθμός δυσκολίας, τα υλικά στης συνταγής και μια λίστα
+    #με τα βήματα της συνταγής με σειρά όπως η σειρά που αποθηκεύονται
     def add_recipe(self, name, category, effort, ingredients, steps):
         try:
             conn = sqlite3.connect(self.db_path)
